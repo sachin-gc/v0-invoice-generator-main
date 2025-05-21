@@ -1,0 +1,42 @@
+name: Frontend CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # Set to your Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint code
+        run: npm run lint
+
+      # Optional: Run tests if you have a test setup
+      - name: Run tests
+        run: npm test  # Change this if you're using a specific testing framework
+
+      - name: Build project
+        run: npm run build
+
+      # Optional: Deploy step if you have deployment configured
+      # - name: Deploy project
+      #   run: npm run deploy  # Uncomment and modify for your deployment process
+
