@@ -22,11 +22,11 @@ jobs:
       # Backend setup
       - name: Install backend dependencies
         working-directory: backend
-        run: npm install
+        run: npm install --legacy-peer-deps  # Install backend dependencies with legacy peer deps
 
       - name: Backend test placeholder
         working-directory: backend
-        run: echo "No backend tests configured"  # Placeholder as no backend tests are configured
+        run: echo "No backend tests configured"  # Placeholder for backend tests
 
       - name: Lint backend code
         working-directory: backend
@@ -35,7 +35,7 @@ jobs:
       # Frontend setup
       - name: Install frontend dependencies
         working-directory: frontend
-        run: npm install
+        run: npm install --legacy-peer-deps  # Install frontend dependencies with legacy peer deps
 
       - name: Lint frontend code
         working-directory: frontend
