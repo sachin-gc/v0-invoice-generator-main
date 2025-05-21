@@ -2,9 +2,9 @@ name: CI for Medease
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build-and-test:
@@ -14,20 +14,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js 18
         uses: actions/setup-node@v4
         with:
-          node-version: '18' # Use Node.js 18 as per your compatibility needs
+          node-version: '18'
           cache: 'npm'
 
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
       - name: Run lint
-        run: npm run lint || true  # Ignore lint errors but show them in logs
+        run: npm run lint
 
       - name: Run tests
-        run: npm test || true  # Skip if not defined; avoids CI failure
+        run: npm test
 
       - name: Build project
         run: npm run build
