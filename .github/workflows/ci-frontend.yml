@@ -17,34 +17,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'  # Set Node.js version to 18 (or as per your requirement)
+          node-version: '18' # Use Node.js 18 as per your compatibility needs
+          cache: 'npm'
 
-      # Backend setup
-      - name: Install backend dependencies
-        working-directory: backend
-        run: npm install --legacy-peer-deps  # Install backend dependencies with legacy peer deps
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
 
-      - name: Backend test placeholder
-        working-directory: backend
-        run: echo "No backend tests configured"  # Placeholder for backend tests
+      - name: Run lint
+        run: npm run lint || true  # Ignore lint errors but show them in logs
 
-      - name: Lint backend code
-        working-directory: backend
-        run: npx eslint . || true  # Lint backend code, ignore errors with `|| true`
+      - name: Run tests
+        run: npm test || true  # Skip if not defined; avoids CI failure
 
-      # Frontend setup
-      - name: Install frontend dependencies
-        working-directory: frontend
-        run: npm install --legacy-peer-deps  # Install frontend dependencies with legacy peer deps
-
-      - name: Lint frontend code
-        working-directory: frontend
-        run: npm run lint || true  # Lint frontend code, ignore errors with `|| true`
-
-      - name: Run frontend tests
-        working-directory: frontend
-        run: npm test || true  # If tests are configured, run them. If not, it will be ignored.
-
-      - name: Build frontend
-        working-directory: frontend
-        run: npm run build  # Build frontend for production or static export
+      - name: Build project
+        run: npm run build
